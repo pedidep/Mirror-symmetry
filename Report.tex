@@ -1,0 +1,498 @@
+\documentclass[a4paper]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{authblk}
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage{dirtytalk}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage[usenames]{color}
+\usepackage{array}
+\usepackage{lscape}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage[all]{xy}
+\usepackage{tikz-cd}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+
+
+\hypersetup{
+     colorlinks   = true,
+     citecolor    = blue}
+\usepackage[top=2.cm,right=2.7cm,bottom=2.1cm,left=2.2cm]{geometry}
+
+\usepackage{xstring}
+\usepackage{letltxmacro}
+
+\LetLtxMacro\origcite\cite
+\renewcommand{\cite}[1]{%
+\begingroup
+\def\tempx{0}%
+  \StrCount{#1}{,}[\tempx]%
+  \ifnum\tempx > 0 
+  Refs. %
+  \else
+  Ref. %
+  \fi
+\endgroup
+\origcite{#1}%
+}
+
+\bibliography{plain}
+\title{\textbf{Report }}
+\author{Pedram Karimi$^*$}
+
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-18mm}
+%\newpage
+
+
+\section*{}
+
+\begin{abstract}
+{
+This report aims to summarize my reading on mirror symmetry. The first step in the understanding of mirror symmetry is to pondering around T-duality. In the following, I review T-duality and its consequences. This report would be a work in progress
+}
+\end{abstract}
+
+
+%\vspace{-2mm}
+
+%\section*{Research Experience}
+
+%\vspace{-1mm}
+\section*{T-Duality}
+\section{Buscher's Law}
+\subsection{Overview}
+The idea behind Buscher's law \cite{Buscher} is to treat gauge invariant in two different ways. Consider having (bosonic) non-linear sigma model 
+\begin{equation}
+S= \int_\sigma g_{m n} dX^m \wedge \star dX^n + B_{m n} dX^m \wedge dX^n,
+\end{equation}
+where Hodge star takes palace in world sheet. We can show that this action is invariant under infinitesimal global transformation. The gauging procedure is to treat global symmetry as a local one with a particular flat connection $\mathcal{A}$. It is important to emphasize the flatness of the connection . There is no harm to add an auxiliary field $\chi$, which its variation indicates the vanishing of Yang-Mills field strength. This is the same constraint we put on Yang-Mills potential $\mathcal{A}$ before. The resulting action has the following form
+
+\begin{align}
+S_{\mathcal{A}} =  \int_\sigma g_{m n} \mathcal{D} X^m \wedge \star \mathcal{D} X^n + B_{m n} \mathcal{D} X^m \wedge \mathcal{D} X^n + \int_{\sigma} \chi_a \mathcal{F}^a,
+\\ \nonumber
+\text{where:} ~ dX^m \mapsto \mathcal{D}X^m = d X^m - \mathcal{A}.
+\end{align}
+which is invariant under the infinitesimal local transformation (we will find the exact form of these transformation laws.). If we integrate out the auxiliary field $\chi$, which means $ \mathcal{F}^a=0$ and then fix the gauge, we find out that $S_{\mathcal{A}} =S$.
+Now the trick of Buscher reveals itself. One can integrate out gauge field and then fixes the gauge. Let us call the resulting action $S_{\chi}$. By giving the role of the coordinate system to our auxiliary field we then fixing the gauge, which once again converts to our original model. Therefore, $S_{\chi}=S=S_{\mathcal{A}}$.
+Let's summarize the procedure in the following steps:
+
+\begin{itemize}
+
+\item Promoting global symmetry to local one with a flat connection.
+\item Adding a new auxiliary field whose equation of motion guarantees the flatness of the connection.
+
+ \item we have an action which construct via
+\\							
+ I) integrate out auxiliary field.\\
+  II)Fixing gauge.
+						
+ \item we have another action which constructs via\\
+$I^{\prime}$) Integrating out connection.\\
+$II^{\prime}$) Fixing the gauge.
+\end{itemize}
+The resulting actions in steps 3 and 4 are related by a so-called Buscher's law. The resulting manifolds are T-dual to each other. In the following, we derive Buscher's law for a non-Abelian gauge field. Then by sending the structure constant of the algebra to zero we gets the results for Abelian T-duality. choosin this method has two reasons. First, we can enjoy a detailed derivation of non-Abelian cases. Second, it is obvious that the non-Abelian scenario is more general and we don't bother ourselves with rederiving Buscher's law for the Abelian case. Let's Address another possibility of this procedure. One can starts with the Green-Schwarz-like sigma model and ends up with a supersymmetric version of T-duality \cite{fermionic}. We won't cover this type of T-duality here (yet).
+\subsection{Derivation}
+In this section, I largely follow \cite{thesis}. I add clarification to that reference and fill the gaps of derivation there. The non-Abelian algebra defines by left-invariant vector field $L_a$ 
+\begin{equation}
+[ L_b , L_c ] = \tilde{f}^{a}_{b c} L_c. 
+\end{equation}
+where $\tilde{f}^{a}_{b c}$ is structure constant. $\lambda^a$ is dual covector of $L_a$, and build a $\mathfrak{g}$-valued Maurer-Cartan 1-form
+\begin{equation}
+\lambda = \lambda^{a} L_a \in \Omega \times \mathfrak{g}, \qquad or, \lambda = g^{-1} dg; g \in G.
+\end{equation}
+Maurer-Cartan is a non-local basis of the metric $ds^2= \delta_{a b} \lambda{a} \lambda^{b}$. Right invariant vector field $R_a$ is Killing vector of this metric since (using the notation of Nakahara's book \cite{nakahara} )
+\begin{align}
+\begin{rcases*}
+\delta_{a b} \mathcal{L}_{R} \lambda^b =\mathcal{L}_{R} L_a &
+\\
+\lim_{\epsilon \to 0} \frac{1}{\epsilon} [ \sigma_{* \epsilon}(Y) |_{ \sigma_{*-\epsilon}(X)} -Y_X ]=0 
+\end{rcases*} \Rightarrow \mathcal{L}_{R} \lambda^a = 0
+\end{align}
+where we use the linearity of the flow. One could start with the right invariant vector field and show that the left-invariant vector field is the Killing vector of the corresponding metric. In fact, there exist a isomorphism between left and right invariant algebra. one can simply show that under this isomorphism $\tilde{f}^{a}_{b c} = -f^{a}_{b c}$ where $f^{a}_{b c}$ is structure constant corresponding to right algebra.
+\\
+We want to work with a non-linear sigma model
+\begin{equation}
+S = \int_\Sigma g_{m n} d X^m \wedge \star d X^n + B_{m n} d X^m \wedge d X^n,
+\end{equation}
+with the group manifold G as target space. To this aim, we define new tensor E on our group manifold 
+\begin{equation}
+E = g_{a b} \lambda^{a} \lambda^{b} + B_{a b} \lambda^a \wedge \lambda^{b}
+\end{equation}
+where lambda is Maurer-Cartan form. Principal chiral model (PCM) emerge as $E_{a b} = \delta_{a b}$ or $\mathcal{L}_{PCM} = Tr \left(  \partial_{\mu} g^{-1} \partial^{\mu} g \right)$, thus PCM can be realized as non-linear sigma model  with vanishing B field. Lets write down the action for G-manifold in null coordinate (light cone coordinate)
+\begin{equation}
+S_{PCM} [\mathfrak{g}] = \int d^2z E_{a b} (g^{-1} \partial g)^a (g^{-1} \bar{\partial} g)^a 
+\end{equation}
+ Constant global transformation leave this action invariance $S_{PCM} [ h \mathfrak{g}] = S_{PCM} [\mathfrak{g}] $. Since right invariant vector field is Killing vector for both metric and B field,  $\delta_\epsilon X^{\mu} = R_{a}^{\mu}\epsilon^a$ is symmetry of non-linear sigma model. Now we can promote global symmetry to local one by introducing connection 1-form $\mathcal{A}$ such that $ d X^{\mu} \to \mathfrak{D} X^{\mu} = \d X^{\mu} - R^{\mu}_{a} \mathcal{A}^a$. The so-called minimally coupled action is
+ \begin{equation}
+S_{\mathcal{A}} =  \int_\sigma g_{m n} \mathcal{D} X^m \wedge \star \mathcal{D} X^n + B_{m n} \mathcal{D} X^m \wedge \mathcal{D} X^n 
+ \end{equation}
+ which remain unchange under $\delta_{\epsilon} \mathcal{A} = d \epsilon^a + f^{a}_{b c} A^{b} \epsilon^{c}$.
+ Note: The trick is to add extra terms such that Yang-Milles field strength vanishes $F^{a} =0$. We call it the choice of flat connection.
+ Now, we add an extra auxiliary term $\chi_a$, whose equation of motion results in the choice of flat connection
+ \begin{equation}
+ S_{\chi} = \int_\Sigma \chi_{a} F^a.
+ \end{equation}
+ 
+ Adding this term should not change the infinitesimal symmetry. So we wish infinitesimal transformation of this term to vanish $\delta_{\epsilon} S_{xi} =0$. The variation of the YM strength field becomes
+\begin{align}
+ \mathcal{F} = F^{a} R_{a} &= ( d \mathcal{A}^{a} +\frac{1}{2} f^{a}_{b c}  \mathcal{A}^{b} \wedge \mathcal{A}^{c} ) R_{a}
+ \\
+ \delta_\epsilon F^a &= d \delta_{\epsilon} \mathcal{A}^a + f^{a}_{b c} \delta _{\epsilon} \mathcal{A}^b \wedge \mathcal{A}^c 
+ \\	 \label{lastterm}
+ &= f^{a}_{b c} d\mathcal{A}^a \epsilon^c + f^{a}_{b c} \mathcal{A}^{b} \wedge d \epsilon^c +f^{a}_{b c}  d \epsilon^b \wedge \mathcal{A}^{c} + f^{a}_{b c} f^{b}_{d e} \mathcal{A}^{d} \epsilon^{e} \wedge \mathcal{A}^{c}
+\end{align}  
+In the second line, we use the relabeling and antisymmetric nature of a wedge of two 1-forms. Note: we are working with the manifold without boundary. Using the Stocks theorem, we can find
+\begin{equation}
+f^{a}_{b c} \mathcal{A}^a \wedge d \epsilon^c = -f^{a}_{b c} d \mathcal{A}^a \epsilon^c =f^{a}_{b c}  d \epsilon^b \wedge \mathcal{A}^c,,
+\end{equation}
+where relabeling on dummy indices has been used. Recall the Jacobi identity:
+\begin{equation}
+f^a _{b c} f^{b} _{d e} +f^a _{b d} f^{b} _{e c} +f^a _{b e} f^{b} _{c d} =0.
+\end{equation}
+In the last term of \eqref{lastterm}, we have an extra antisymmetricity on "c" and "d". Putting it all together
+\begin{align}
+\delta_{\epsilon} F^a &= -f^a_{b c} d \mathcal{A}^b \epsilon^c - \frac{1}{2} f^a_{b c} f^b_{d e} \epsilon^c \mathcal{A}^d \wedge \mathcal{A}^e.
+\\
+\delta_{\epsilon} F^a &= -f^{a}_{b c} F^d \epsilon^c
+\end{align}
+As stated, we assumed the variation of $\chi$-action to vanish under infinitesimal transformation, which results in
+\begin{align}
+\delta_{\epsilon} \chi_{b} F^b &= - \chi_a f^a_{b c} F^b \epsilon^c
+\\
+\delta_{\epsilon} \chi_{b} &= -\chi_{a} f^{a}_{b c} \epsilon^{c}.
+\end{align}
+We have a group manifold with the non-linear sigma model on it. We can decompose bundle field for G-fiber as
+\begin{align}
+ds^2 &= g_{\mu \nu} d X^{\mu} dX^{\nu} + 2 g_{\mu n} d X^{\mu} \lambda^n + g_{m n} \lambda^{m} \lambda^{n},
+\\
+B &=   B_{\mu \nu} d X^{\mu} \wedge dX^{\nu} + 2 B_{\mu n} d X^{\mu} \wedge \lambda^n + B_{m n} \lambda^{m} \wedge \lambda^{n}.
+\end{align}
+We are going to repeat steps to derive Buscher's law in a light-cone coordinate system where the action becomes
+\begin{equation}
+S = \int_{\Sigma} d^z [ E_{\mu \nu} \partial X^{\mu} \bar{\partial} X^{\nu} + E_{m \nu} \partial X^{m} \bar{\partial} X^{\nu} +E_{\mu n} \partial X^{\mu} \bar{\partial} X^{n} + E_{m n} \partial X^{m} \bar{\partial} X^{n} ].
+\end{equation} 
+The gauging procedure for this metric requires certain quantities. In this coordinate system, covariant derivative, connection, and YM field strength have the following forms
+\begin{align}
+  \mathcal{A}^m& = A^m dz + \bar{A} d \bar{z}
+  \\
+  \partial X^m \to D X^m &= \partial X^m - A^m,
+  \\
+   \bar{\partial} X^m \to \bar{D} X^m &= \bar{\partial} X^m -\bar{ A}^m,
+   \\
+   F^a &= \bar{\partial} A^a - \partial A^a + f^a_{b c} A^a \bar{A}^b.
+  \end{align}
+  Adding auxiliary term $\chi^a$ which indicate flatness of connection the gauged actions becomes
+  \begin{align} \nonumber
+  S= \int dz^2  [ & E_{ \mu \nu} \partial X^{\mu} \bar{\partial} X^{\nu} +E_{m \nu} D X^{m} \bar{\partial} X^{\nu}	+E_{ \mu n} \partial X^{\mu} \bar{D} X^{n} +E_{ m n} D X^{m} \bar{D} X^{n}
+  \\
+  &\chi_a \left( \partial \bar{A}^a - \bar{\partial} A^a +f^a_{b c} A^b \bar{A}^c \right) ].
+  \end{align}
+  According to prescription, we have to integrate out $\mathcal{A}$. Thus, we find out variation of A
+  \begin{align} \nonumber
+  \frac{\delta S}{\delta A^m} = -E_{m \nu} \bar{\partial} X^{\nu} - E_{m n} \bar{D} X^n & + \bar{\partial} \chi_{m} + f^{a}_{m e} \bar{A}^c \chi_{a} 
+  \\
+  \therefore E_{m \nu} \bar{\partial} X^{\nu} + E_{m n} \partial X^n + \bar{\partial } \chi_{m} = &M_{m n} (E_{m n} + \chi_a f^a_{m n}) \bar{A}^n 
+  \\ \nonumber
+  \text{where}~ & M_{m n} =  E_{m n} + \chi_a f^a_{m n}
+  \end{align}
+  Equation of motion for A and $\bar{A}$ are
+  \begin{align}
+  \bar{A}^s = (M^{-1})^{m s} E_{m \nu} \bar{\partial}X^{\nu} + (m^{-1}) ^{m s} E_{m n} \partial X^{n} -\bar{\partial}X_{m} (M^{-1})^{m s}
+  \\
+    A^s = (M^{-1})^{m s} E_{m \nu} {\partial}X^{\nu} + (m^{-1}) ^{m s} E_{m n} \bar{\partial} X^{n} +{\partial}X_{m} (M^{-1})^{m s}
+  \end{align}
+ We replace the above terms in action and then fix the gauge as $\partial X^m = \bar{\partial} X^m = 0$. To simplify the calculation, one can replace $DX^m \rightarrow -A^m$ and $\bar{D}X^m \rightarrow -\bar{A}^m$. Now, we promote auxiliary field $\chi$ to coordinate, thus in new coordinates $\left\lbrace X^{\mu}, \chi_m \right\rbrace$, we have once again non linear sigma model
+ \begin{equation}
+ S= \int_\sigma dz^2 \left[ \hat{E}_{\mu \nu} \partial X^\mu \bar{\partial} X^{\nu} + \hat{E}^{m }~_{\nu} \partial \chi_m \bar{\partial} X^{\nu} + \hat{E}_{\mu }~^{n} \partial X^{\mu} \bar{\partial} \chi_{n} +  \hat{E}^{m n} \partial \chi_m \bar{\partial} \chi_{n} \right].
+ \end{equation}
+ where hat entities are shaping dual manifold, and their relationship with previous entities, is celebrated Buscher's Law
+\begin{align} \nonumber
+ \hat{E}^{m n} = (M^{-1})^{m n}, \qquad & \hat{E}_{\mu}~^{ n} = E_{\mu t} (M^{-1})^{t n},
+ \\
+ \hat{E}^{m}~_{ \nu} = - (M^{-1})^{m s} E_{s \nu}, \qquad &\hat{E}_{\mu \nu} = E_{\mu \nu} - E_{\mu m}(M^{-1})^{m n} E_{n \nu}.
+ \end{align}
+ The Abelian Buscher's law can be found by considering $f^{a}_{b c} = 0$, therefore, $M_{m n}=E_{m n}$. If coordinates of initial manifold along killing vector$k=\partial_{\theta}$ labeled by $m=n=\theta$, then Buscher's law for Abelian case will be emerged from the non-Abelian one by decomposing E to symmetric (g) and antisymmetric (B) parts
+\begin{align}\nonumber
+\hat{g}_{\hat{\theta} \hat{\theta}} = \frac{1}{g_{\theta \theta}}, \qquad \hat{g}_{\mu \hat{\theta}} =\frac{B_{\mu \theta}}{g_{\theta \theta}}, \qquad & \hat{B}_{\mu \hat{\theta}} = \frac{g_{\mu \theta}}{g_{\theta \theta}},
+\\ \label{abelianbuscher}
+\hat{g}_{\mu \nu} =g_{\mu \nu}-\frac{g_{\mu \theta} g_{\nu \theta} - B_{\mu \theta} B_{\nu \theta}}{g_{\theta \theta}}, \qquad &\hat{B}_{\mu \nu} =B_{\mu \nu}-\frac{B_{\mu \theta} g_{\nu \theta} - g_{\mu \theta} B_{\nu \theta}}{g_{\theta \theta}}.
+\end{align}
+where dual manifold coordinates is $\lbrace X^{\mu}, \hat{\theta} \rbrace$. The simplest case to discuss is
+\begin{equation}
+ds^2_{C}= \Sigma_{i=1}^{d} dX^2_{i} + R^2 d \theta^2,
+\end{equation}
+which is a flat metric in the cylinder with radius R.  If we put this to Abelian version of Buscher's law, obviously $\partial_{\theta}$ is Killing vector, the dual metric becomes
+\begin{equation}
+\hat{ds}^2_{C}= \Sigma_{i=1}^{d} dX^2_{i} + \frac{1}{R^2} d \hat{\theta}^2.
+\end{equation}
+This reveals celebrated manifestation of T-duality, $R \to \frac{1}{R}$.This manifestation always exists along a static coordinate. It is a proper assumption to consider the energy of the system to be proportion to the existing length of the system $E \propto R^n$, for instants consider harmonic oscillator. Therefore, the corresponding energy of each system, for a large radius, change dramatically from IR physics to UV. Thus, a sort of UV/IR correspondence also exists in T-duality. With Buscher's law at hand, we are going to discuss different aspects of T-duality through some examples in the last section.
+\section{Topological T-duality}
+\subsection{Gysin sequence}
+According to \cite{mathai} topological properties of T-duality can be understood from a mathematical point of view through Gysin sequence. Integration along fiber or push-forward of a form can be defined as a linear map on a fiber bundle $(E,M,\pi)$\begin{tikzcd}        
+F \arrow[r,hook] & E\arrow[d,"\pi"]\\
+&M
+\end{tikzcd}\\
+that
+\begin{align} \nonumber
+\pi_{*} : H^{k}(E) \to H^{k-m}(M),
+\\
+(\pi_{*} \alpha)_M( \omega_1, \dots ,\omega_{k-m}) = \int_{\pi^{-1}(M)	}\beta
+\end{align}
+where $\beta$ induced top form on the fiber $\pi^{-1}(b)$.  Integration along fiber or push-forward of the form for sphere bundle forms an exact sequence called Gysin sequence. For a $S^1$-bundle \begin{tikzcd}        
+S^1 \arrow[r,hook] & E\arrow[d,"\pi"]\\
+&M
+\end{tikzcd} we have
+\begin{equation} \label{gysin}
+\begin{tikzcd}
+\dots  \arrow[r] & H^{k}(M) \arrow[r,"\pi^*"] &H^{k}(E) \arrow[r,"\pi_*"] &H^{k-1}(M)   \arrow[r,"F \wedge"] &H^{k+1} \arrow[r] &\dots 
+\end{tikzcd}
+\end{equation}
+here, $\pi^*$ is a canonical pull-back for fiber bundle, $\pi_*$ is push-forward, or integration along the fiber. F is the curvature in base manifold $F \in H^2(M)$. Consider the following diagram 
+\begin{equation}
+\begin{tikzcd}        
+  & \arrow[dl,"p"'] E \times_M \hat{E} \arrow[dr, "\hat{p}"]&  \\
+E \arrow[dr, "\pi"'] & & \hat{E} \arrow[dl, "\hat{\pi}"] \\
+& M& 
+\end{tikzcd}
+\end{equation}
+We have 
+$
+E \times_{M} \hat{E} = \left\lbrace
+															\left( 
+																x, \hat{x}
+															\right) \in E \times \hat{E}~ | ~\pi \left(
+																													x
+																										\right)  = \hat{\pi} \left(
+																																		\hat{x}
+																																	\right)
+														\right\rbrace.
+$
+Immediately, if $E = \hat{E}$ or $\hat{E} = M \times S^{1}$ from the diagram we gets $E \times \hat{E} \equiv E \times S^1$. We are now focus on Gysin sequence. Let $A \in \Omega^1 (E)$ and $\hat{A} \in \Omega^1 (\hat{E})$ be connection one form and their first chern class which is curvature to be $F = dA$ and $\hat{F} =d \hat{A}$ respectively.  The connections are normalized as $\pi_*{A} = \hat{\pi}_* \hat{A}=1$ . As \cite{mathai} suggested the $k=3$ segment of Gysin sequence are topological describtion of T-duality. Considering E as $S^1$-bundle with H-flux, $H \in H^3(E)$. Due to the Gysin sequence we can associate $\hat{F} = \pi_{*} H \in H^2(M)$	. We can simply show that for an exact sequence  $F \wedge \hat{F}=0 \in H^4(M)$.
+\\
+Note: For any two exact forms $Q,R$, we have $Q = dq \in \Omega^{m+1}$ and $R =dr$. Thus their wedge can be expand as
+\begin{align} \label{exactness} \nonumber
+&Q \wedge R  = dq \wedge dr = \frac{1}{2} d(q \wedge dr + (-1)^m dq \wedge r)
+\\ \nonumber
+& d(q \wedge r)  = dq \wedge r = (-1)^m q \wedge dr
+\\
+\therefore & d( q \wedge dr + (-1)^m (d(q \wedge r) - (-1)^m q \wedge dr ) = d^2(q \wedge r) =0.
+\end{align}  
+One can reverse the role of E and $\hat{E}$ since we have $ \hat{F} \wedge F=F \wedge \hat{F}=0$, there should exist $\hat{H} \in H^3(\hat{E})$ such that $\hat{\pi}_* \hat{H} =F$. As authors in \cite{mathai} suggested
+\begin{center}
+\begin{boxed}
+{
+\text{ $(E,H)$ are T-dual to $(\hat{E},\hat{H})$ through a transformation that arise from Gysin sequence for a particular $\hat{H}$. }
+}
+\end{boxed}
+\end{center}
+This particular choice exists due to ambiguity in $\hat{H}$. One direct consequence of integration along the fiber is that if we couldn't align a dual basis in the fiber, the push-forward vanishes. The simplest case of this scenario is vanishing of push-forward of pull-back of any form in the base manifold $\pi_* \pi^* =0$. Now, we can understand why ambiguity exists. One can add an element of the form $\pi^* H^3(M)$ to $\hat{H}$ while $\hat{F}$ remain unchanged.
+How to solve this ambiguity? The idea of \cite{mathai} is that T-duality do not change the part of H-flux which soppurts in base manifold M. We start with ansatz for H containing 3-form $\Omega \in \Omega^3(M)$, which we wish to remain unchanged in $\hat{H}$ 
+\begin{equation}\label{h}
+H = A \wedge \pi^* \hat{F} - \pi^* \Omega
+\end{equation}
+Using Gysin sequence for $k=3$ we find that $F \wedge \hat{F}=0 \in H^{4}(M)$. Hence, locally we have  $F \wedge \hat{F}=d \alpha$ where alpha is 3-form in M $\alpha \in \Omega^3(M)$. Before continuing lets recall three results from \cite{botts}:
+\begin{itemize}
+\item Proposition 6.14.11 \cite{botts}: integration along the fiber commute with exterior diffrentiation $\pi_* d= d \pi_*$.
+\item Proposition 6.15 \cite{botts} (Projection formula): Let $\tau \in \Omega(M)$ and $\omega \in \Omega(E)$ then we have
+\begin{equation}
+\pi_{*} \left(
+				\left(
+						\pi^* \tau
+					\right) \wedge \omega
+				\right) = \tau \wedge \pi_* \omega
+\end{equation}   
+\end{itemize}
+By taking diffrential form of  $A \wedge \pi^* \hat{F} - \pi^* \alpha$ and using the facts that $d \pi^* = \pi^*d$, and $\pi^*(F\wedge\hat{F}) = \pi^* F \wedge \pi^* \hat{F}$ 
+\begin{equation}
+d \left( A \wedge \pi^* \hat{F} - \pi^* \alpha \right) = dA \wedge \pi^* \hat{F} - \pi* d \alpha = dA \wedge \pi^* \hat{F} =0
+\end{equation} 
+the last step vanishes by the exactness argument (similar to \eqref{exactness}), which means it is an element of $ H^3(E)$.	It is clear that $\pi_*  \left( A \wedge \pi^* \hat{F} - \pi^* \alpha \right)=0 \in H^3(E)$. Since the push-forward of the pull-back of any forms vanishes, and any elements of cohomology class is fixed up to some exact-form, thus for  a $\gamma \in \Omega^2(M)$ and  $\beta \in H^3(M)$ we can write
+\begin{align} \nonumber
+& \pi_*\left(H - A \wedge \pi^* \hat{F} - \pi^* \alpha = \pi^*( \beta + d \gamma) \right)=0
+\\ \label{omega}
+\therefore  & \pi^* \Omega - \pi^* \alpha = \pi^*( \beta + d \gamma) \Rightarrow
+\begin{boxed} 
+{
+\Omega =\alpha - \beta -d \gamma.
+}
+\end{boxed}
+\end{align}
+The $\hat{H}$ is now define as
+\begin{equation}
+\hat{H} = \hat{\pi}^* F \wedge \hat{A} - \hat{\pi}^* \Omega \in \Omega^3(\hat{E})
+\end{equation}
+We can simply show that this is closed form using \eqref{omega} and, therefore, $\hat{H} \in H^3(\hat{E})$. The T-duality is equivalence to
+\begin{equation} \label{tsuality}
+\pi_* H = ch_1(\hat{E})=\hat{F}, \qquad \hat{\pi}_* \hat{H} = ch_1({E})={F}.
+\end{equation}
+In summary, one can fix the ambiguity by demanding that H-flux fixed in two sides of duality at the base manifold. This manifests itself in $\Omega$, which is the same for both sides of duality. \cite{mathai} defines new $\mathfrak{B}$ in the corresponding space $E \times_M \hat{E}$ as
+\begin{equation}
+\mathfrak{B} = p^* A \wedge \hat{p}^* \hat{A} \in \Omega^2(E \times_M \hat{E})
+\end{equation}
+Taking derivative of this form we gets
+\begin{align} \nonumber
+d \mathfrak{B} &= d p^*A \wedge \hat{p}^* \hat{A}  - A \wedge d\hat{p}^* \hat{A} = p^* dA \wedge \hat{p}^* \hat{A}  - A \wedge \hat{p}^* d \hat{A} 
+\\ \nonumber
+&= p^* \pi^* F \wedge \hat{p}^* \hat{A} - p^* A \wedge \hat{p}^* \wedge \hat{p}^* \hat{\pi}^*\hat{F}=\hat{p}^*\left(\hat{\pi}^* F \wedge \hat{A} - \hat{\pi}^* \Omega + \hat{\pi}^* \Omega \right) - {p}^*\left({A} \wedge{ \pi}^* \hat{F}  - {\pi}^* \Omega + {\pi}^* \Omega \right)
+\\
+&= \hat{p}^* (\hat{H})+ \hat{p}^* \hat{\pi}^* \Omega - p^* \pi^* \Omega - p^*(H) =
+\begin{boxed}
+{
+ \hat{p}^* (\hat{H})- p^*(H)=d\mathcal{B},
+}
+\end{boxed}
+\end{align}
+where we extensively use commutativity of diagram \eqref{gysin}, which means $\pi p = \hat{\pi} \hat{p}$ or for the pull-back $p^* \pi^*  = \hat{p}^* \hat{\pi}^*$.
+\section{Examples}
+\subsection{$S^1$-bundle over $T^3$ }
+\begin{tikzcd}        
+    S^1 \arrow[r, hook] & E \arrow[d, "\pi"]  \\
+    & T^2
+\end{tikzcd},
+The first example is nilmanifold with the metric
+\begin{equation}
+ds^2= dx^2+dy^2+\left( dz + j x dy\right)^2.
+\end{equation}
+The identification of the metric is
+\begin{equation}
+(x,y,z) \sim (x, y+1,z) \sim (x, y, z+1) \sim (x+1, y, z - jy).
+\end{equation}
+The $\{ x, y\}$ shapes $T^2$, while in the periodicity condition for x (forth equivalence), the z part twist along y. Then we can think of this background as nontrivial $S^1$-bundle over $T^2$. The connection over a base manifold $M$ always has the following form
+\begin{equation}
+ds^2(E) = ds^2(M) + \mathcal{A}^2.
+\end{equation}
+Then, we can read connection one form of $S^1$-bundle as 
+\begin{equation}
+\mathcal{A} = dz + j x dy
+\end{equation}
+The H-flux for the 3-manifold is a top form. Following \cite{mathai}, we consider 
+\begin{equation}
+H= k dx\wedge dy \wedge dz
+\end{equation}
+The curvature or first Chern class can easily read as
+\begin{equation}
+F=d \mathcal{A} =j dx \wedge dy
+\end{equation}
+Now,  we use the formula \eqref{tsuality}, also we consider corresponding bundle $E \times_M \hat{E}$
+\begin{equation}\label{hex1}
+\pi_* H = dx \wedge dy \int k dz = k dx \wedge dy = \hat{F}, \qquad dx \wedge dy\int \hat{h} d \hat{z} = j dx \wedge dy.
+\end{equation}
+Since $\hat{H} \in H^3(\hat{E})$ is top form, we can write it as $\hat{H} = \hat{h} dx \wedge dy \wedge dz$. If we consider $\hat{h}$ to be analytical function of $\hat{z}$ it is become
+\begin{equation}
+j = \sum_{i=0}^{\infty} \frac{a_i}{1+i} ;\qquad \hat{h}=\sum_{i=0}^{\infty} a_i \hat{z}^i 
+\end{equation}
+Now, we apply Buscher's law. Following B field generate our H-flux
+\begin{equation}
+B = k x dy \wedge dz.
+\end{equation}
+It was chosen in the way that $\kappa = \partial / \partial_z$ became Killing vector $\mathcal{L}_\kappa B=0$. Using Buscher's law, we can easily find
+\begin{align}
+\hat{ds}^2 &= 	dx^2 + dy^2+ \left( d \hat{z} + k x dy \right)^2
+\\
+\hat{B} &= j x dy \wedge d\hat{z}.
+\end{align}
+Reading $\hat{H}$-flux for this set up we have
+\begin{equation}
+\hat{H} = j dx \wedge dy \wedge d \hat{z}, \Rightarrow \hat{h}(z) = j,
+\end{equation}
+which means Buscher's law choose $a_i = j \delta_{i 0}$. This manifold again is $S^1$-bundle over $T^2$. The curvature for its connection $\hat{\mathcal{A}} =\left( d \hat{z} + k x dy \right)$ is
+\begin{equation}
+\hat{F} = k dx \wedge dy,
+\end{equation}
+which confirms the previous result. Following \cite{mathai}, we calculate the other quantity
+\begin{equation}
+\mathcal{A} \wedge \hat{\mathcal{A}} = dz \wedge d \hat{z} - B +\hat{B}.
+\end{equation}
+\subsection{$T^3$ with H-flux}
+Let's examine the following set up 
+\begin{align}
+ds^2 = g &= dx^2+dy^2 + dz^2
+\\
+B & =- k x dx \wedge dy
+\end{align}
+The identifications are
+\begin{equation}
+(x, y, z) \sim (x+1, y, z) \sim (x, y+1, z) \sim (x, y, z+1).
+\end{equation}
+Clearly, $\kappa = \partial_z$ is Killing vector $\mathcal{L}_\kappa (g) = \mathcal{L}_\kappa (B) = 0$. The connection is $\mathcal{A}=  dz$ which means it is flat connection $F=0$ .Using Gysin sequence we get
+\begin{equation}
+\pi_* H = -k dx \wedge dy = \hat{F}, \qquad \hat{\pi}_* \hat{H}=0 \Rightarrow \hat{H}=0
+\end{equation}
+Employing Buscher's law, we can find T-dual manifold
+\begin{align}
+\hat{ds}^2 = \hat{g}= dx^2 +dy^2+\left(d \hat{z} - k x dy \right)^2,
+\\
+\hat{B}=0 = \hat{H}.
+\end{align} 
+The last equation was given before. The connection 1-form is $\hat{\mathcal{A}}= d \hat{z} - k x dy $. The first curvature for this bundle over $S^1$ is  $\hat{F}= -k dx \wedge dy$. The final quantity to calculate is
+\begin{equation}
+\mathcal{A} \wedge \hat{\mathcal{A}} = dz \wedge d \hat{z} + k x dy \wedge dz = dz \wedge d \hat{z} -B.
+\end{equation}
+
+%\vspace{-2mm}
+\bibliographystyle{plain}
+\bibliography{s1} 
+\begin{thebibliography}{15}
+%\cite{Buscher:1987sk}
+\bibitem{Buscher}
+T.~H.~Buscher,
+%``A Symmetry of the String Background Field Equations,''
+Phys. Lett. B \textbf{194}, 59-62 (1987)
+doi:10.1016/0370-2693(87)90769-6
+%871 citations counted in INSPIRE as of 12 Dec 2020
+
+%\cite{Berkovits:2008ic}
+\bibitem{fermionic}
+N.~Berkovits and J.~Maldacena,
+%``Fermionic T-Duality, Dual Superconformal Symmetry, and the Amplitude/Wilson Loop Connection,''
+JHEP \textbf{09}, 062 (2008)
+doi:10.1088/1126-6708/2008/09/062
+[arXiv:0807.3196 [hep-th]].
+%298 citations counted in INSPIRE as of 12 Dec 2020
+
+%\cite{Bugden:2019wnc}
+\bibitem{thesis}
+M.~Bugden,
+%``A Tour of T-duality: Geometric and Topological Aspects of T-dualities,''
+[arXiv:1904.03583 [hep-th]].
+%1 citations counted in INSPIRE as of 12 Dec 2020
+
+%\cite{Nakahara:2003nw}
+\bibitem{nakahara}
+M.~Nakahara,
+``Geometry, topology and physics,''
+%249 citations counted in INSPIRE as of 12 Dec 2020
+
+%\cite{Bouwknegt:2003vb}
+\bibitem{mathai}
+P.~Bouwknegt, J.~Evslin and V.~Mathai,
+%``T duality: Topology change from H flux,''
+Commun. Math. Phys. \textbf{249}, 383-415 (2004)
+doi:10.1007/s00220-004-1115-6
+[arXiv:hep-th/0306062 [hep-th]].
+%186 citations counted in INSPIRE as of 12 Dec 2020
+%\cite{Nakahara:2003nw}
+\bibitem{botts}
+Raoul~Bott, Loring~W.~Tu
+``Differential Forms in Algebraic Topology ,''
+%249 citations counted in INSPIRE as of 12 Dec 2020
+
+\end{thebibliography}
+
+\textsl{$*$ pedramkarimie@gmail.com}\\
+%	\textsl{Github: pedidep}
+
+\end{document}
